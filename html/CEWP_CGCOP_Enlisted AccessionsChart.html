@@ -1,0 +1,159 @@
+﻿<html>
+	<head>
+		<link href="/sites/cpg/SiteAssets/css/all.css" rel="stylesheet">
+		<link href="/sites/cpg/SiteAssets/css/jquery.dataTables.css" rel="stylesheet">
+		<link href="/sites/cpg/SiteAssets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sites/cpg/SiteAssets/css/spreset.css" rel="stylesheet">
+		<link href="/sites/cpg/SiteAssets/css/common.css" rel="stylesheet">
+		<link href="/sites/cpg/SiteAssets/css/site.theme.css" rel="stylesheet">
+		<style type="text/css">
+			/*#chart, #chart_container {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					width: 800px;
+					height: 500px;
+					transform: translate(-50%, -50%);
+					margin: auto;
+					z-index: 50;
+					}*/
+			#chart, #chart_container {
+				height: 500px;
+				margin: auto;
+				z-index: 50;
+			}
+
+			#chart_loading {
+				position: absolute;
+				background: #ffffff;
+				width: 350px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				height: 120px;
+				padding: 10px;
+				color: #000000;
+				margin: auto;
+				font-family: "Segoe UI";
+				font-size: 16px;
+				text-align: center;
+				vertical-align: middle;
+				display: block;
+				z-index: 51;
+			}
+			.popRow {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 16px;
+				margin-bottom: 1px;
+			}
+			.highcharts-container {
+				overflow: visible !important;
+			}
+			.highcharts-title {
+				color: #000000 !important;
+				fill: #000000 !important;
+			}
+			.chartpopup {
+				background: rgba(255, 255, 255, 1);
+				min-width: 125px;
+			}
+			#chartlegend {
+				border: 1px solid black;
+				margin-top: 5px;
+				height: 24px;
+			}
+				#chartlegend .text {
+					font-size: 16px;
+					padding-top: 4px;
+				}
+			.highcharts-figure, .highcharts-data-table table {
+				min-width: 310px;
+				max-width: 800px;
+				margin: 1em auto;
+			}
+			#container {
+				height: 400px;
+			}
+			.highcharts-data-table table {
+				font-family: Verdana, sans-serif;
+				border-collapse: collapse;
+				border: 1px solid #EBEBEB;
+				margin: 10px auto;
+				text-align: center;
+				width: 100%;
+				max-width: 500px;
+			}
+			.highcharts-data-table caption {
+				padding: 1em 0;
+				font-size: 1.2em;
+				color: #555;
+			}
+			.highcharts-data-table th {
+				font-weight: 600;
+				padding: 0.5em;
+			}
+			.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+				padding: 0.5em;
+			}
+			.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+				background: #f8f8f8;
+			}
+			.highcharts-data-table tr:hover {
+				background: #f1f7ff;
+			}
+		</style>
+		<script src="/_layouts/1033/init.js?rev=0OHTJmtljdkrRniX3Vao7A%3D%3D" type="text/javascript"></script>
+		<script src="/sites/cpg/siteassets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+		<script src="/sites/cpg/siteassets/js/spservices.min.js" type="text/javascript"></script>
+		<script src="/sites/cpg/siteassets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+		<script src="/sites/cpg/siteassets/js/jquery.dataTables.js" type="text/javascript"></script>
+		<script src="/sites/cpg/siteassets/js/utilityfunctions.js" type="text/javascript"></script>
+
+		<script src="/_layouts/1033/msstring.js?rev=QtiIcPH3HV7LgVSO7vONFg%3D%3D" type="text/javascript"></script>
+		<script src="/_layouts/1033/ie55up.js?rev=UgTcwUTI6YcRzTMBxD93Xg%3D%3D" type="text/javascript"></script>
+		<script src="/ScriptResource.axd?d=8f6_zi-apEuxL5K3Fqd1zgVJ97MilEB2F1CCe1TYd9dzENp-iWYmyJBmUklkykU8s9xyVhCGgNAnlXJWH7XMR2m8nZvdAY821PLS2Q8964iHMbUXt_emase-0vq53tM0RNK9Dx8Gs0lnhw0nWQF6f49RDhw1&amp;t=3f4a792d" type="text/javascript"></script>
+		<script src="/_layouts/blank.js?rev=QGOYAJlouiWgFRlhHVlMKA%3D%3D" type="text/javascript"></script>
+		<script src="/ScriptResource.axd?d=uKeO6GhAbjQ9D1arToS7xUMbqev1XKRFG7WPJiP8nV8hPN5F-bqS3OymOx0KQuh0pteW88FtWehoD0nxmbbTsCuW2lWJvtLZvMhBRT-c2C20YsNEYEWRtc2sV3pic8T5nBABprwAZt3-M5pzsMvvObUQb0SeTHedyAqvazBsOS0ZcpzP0&amp;t=3f4a792d" type="text/javascript"></script>
+
+		<script language="javascript" type="text/javascript">
+			SP.SOD.executeOrDelayUntilScriptLoaded( function (){
+				var SLASH = "/";
+				var tp1 = new String( window.location.protocol );
+				var tp2 = new String( window.location.host );
+				var tp3 = L_Menu_BaseUrl;
+				console.log( "tp3", tp3 );
+				var site = tp1 + SLASH + SLASH + tp2 + tp3;
+				console.log( "site: " + site + "/SiteAssets/js/CEWP_CGCOP_EnlistedAccessionsChart.js" );
+				SP.SOD.registerSod( 'CEWP_CGCOP_EnlistedAccessionsChart.js', site + "/SiteAssets/js/CEWP_CGCOP_EnlistedAccessionsChart.js" );
+				console.log( "you are a goober!" );
+				EnsureScriptFunc( "CEWP_CGCOP_EnlistedAccessionsChart.js", null, function (){
+					console.log( "calling EA chart" );
+					DrawEAChart( site );
+					console.log( "called EA chart" );
+				} );
+			}, "sp.js" );
+		</script>
+	</head>
+	<body>
+		<div id="chart" style="">
+			<div id="chart_loading">
+				<table width="100%" align="center">
+					<tbody>
+						<tr><td align="center"><img src="/_layouts/images/gears_an.gif"></td></tr>
+						<tr><td align="center"><div style="margin-top: 10px; font-size: 16px;">Getting Chart Data...Please wait.</div></td></tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="chart_container"></div>
+		</div>
+		<div id="chartlegend" class="container-fluid">
+			<div class="row d-flex justify-content-between">
+				<div class="text text-warning col-xs-3 nopadding">Missions</div>
+				<div class="text text-info col-xs-3 nopadding">Accessions</div>
+				<div class="text text-danger col-xs-3 nopadding">Future</div>
+			</div>
+		</div>
+	</body>
+</html>

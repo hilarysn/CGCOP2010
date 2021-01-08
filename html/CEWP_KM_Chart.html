@@ -1,0 +1,118 @@
+﻿<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+	<style type="text/css">
+			/*#chart, #chart_container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 800px;
+			height: 500px;
+			transform: translate(-50%, -50%);
+			margin: auto;
+			z-index: 50;
+		}*/
+			#chart, #chart_container {
+				height: 500px;
+				margin: auto;
+				z-index: 50;
+			}
+
+			#chart_loading {
+				position: absolute;
+				background: #ffffff;
+				width: 350px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				height: 120px;
+				padding: 10px;
+				color: #000000;
+				margin: auto;
+				font-family: "Segoe UI";
+				font-size: 16px;
+				text-align: center;
+				vertical-align: middle;
+				display: block;
+				z-index: 51;
+			}
+
+			.popRow {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 16px;
+				margin-bottom: 1px;
+			}
+
+			.highcharts-container {
+				overflow: visible !important;
+			}
+
+			.highcharts-title {
+				color: #000000 !important;
+				fill: #000000 !important;
+			}
+
+			.chartpopup {
+				background: rgba(255, 255, 255, 1);
+				min-width: 125px;
+			}
+
+			#chartlegend {
+				border: 1px solid black;
+				margin-top: 5px;
+				height: 24px;
+			}
+
+				#chartlegend .text {
+					font-size: 16px;
+					padding-top: 4px;
+				}
+	</style>
+
+	<script language="javascript" type="text/javascript">
+    SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+        var SLASH = "/";
+        var tp1 = new String(window.location.protocol);
+        var tp2 = new String(window.location.host);
+		var tp3 = L_Menu_BaseUrl;
+		console.log( "tp3", tp3 );
+        var site = tp1 + SLASH + SLASH + tp2 + tp3;
+        SP.SOD.registerSod('CEWP_KM_Chart.js', site + "/SiteAssets/js/CEWP_KM_Chart.js");
+        EnsureScriptFunc("CEWP_KM_Chart.js", null, function () {
+            DrawKPPMChart(site);
+        });
+    }, "sp.js");
+	</script>
+
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">M54EMC6KRVNF-1296556275-45</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">170f5ebd-e315-4162-a5ba-51e20710b6fa</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://hq.tradoc.army.mil/sites/OCKO/PMT/_layouts/DocIdRedir.aspx?ID=M54EMC6KRVNF-1296556275-45, M54EMC6KRVNF-1296556275-45</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+	<div id="chart" style="">
+		<div id="chart_loading">
+			<table width="100%" align="center">
+				<tbody>
+					<tr><td align="center"><img src="/_layouts/images/gears_an.gif"></td></tr>
+					<tr><td align="center"><div style="margin-top: 10px; font-size: 16px;">Getting Chart Data...Please wait.</div></td></tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="chart_container"></div>
+	</div>
+	<div id="chartlegend" class="container-fluid">
+		<div class="row d-flex justify-content-between">
+			<div class="text text-warning col-xs-3 nopadding">HQ TRADOC</div>
+			<div class="text text-success col-xs-3 nopadding">Supported by TRADOC HQ</div>
+			<div class="text text-info col-xs-3 nopadding">Supported on site</div>
+			<div class="text text-danger col-xs-3 nopadding">Not currently supported</div>
+		</div>
+	</div>
+</body>
+</html>

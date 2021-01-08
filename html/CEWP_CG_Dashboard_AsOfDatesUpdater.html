@@ -1,0 +1,133 @@
+﻿<script src="https://hq.tradoc.army.mil/sites/cpg/SiteAssets/js/moment.min.js"></script>
+<script src="https://hq.tradoc.army.mil/sites/cpg/SiteAssets/js/moment-timezone.min.js"></script>
+
+<script>
+	function updateAsOfDate(){
+		$(document).ready(function(){
+			var idNames = [];
+			var listName = "";
+			var asOfDate;
+			var x = $(".ms-WPHeader");
+			for (i=0; i < x.length; i++){
+				//G8 Resource Managment and CG CATS Taskers are live data and NOT included in this
+				if(x[i].cells[1].id !=="WebPartTitleWPQ3" && x[i].cells[1].id !=="WebPartTitleWPQ9" && x[i].cells[1].id !== "WebPartTitleWPQ16") {
+					idNames[i]="#" + x[i].cells[1].id;
+				}
+			}
+			console.log("idNames: ", idNames);
+			//Anytime a new webpart is added to the CG COP dashboard, the titleID and List Name (List Name where the webpart is pulling from, NOT the web part title) will need to be added to the switch block.
+			idNames.forEach(function(idName){
+				switch(idName) {
+					case '#WebPartTitleWPQ12': 
+						listName = 'EnlistedAccessionsByFiscalYear';
+						break;
+					case '#WebPartTitleWPQ15':
+						listName = 'CadetMissionCommandByFY';
+						break;
+					case '#WebPartTitleWPQ8':
+						listName = 'TripReports';
+						break;
+					case '#WebPartTitleWPQ5':
+						listName = 'SocialMedia';
+						break;
+					case '#WebPartTitleWPQ14':
+						listName = 'USACC_REDCAT';
+						break;
+					case '#WebPartTitleWPQ4':
+						listName = 'TRADOCCampaignPlan';
+						break;
+					case '#WebPartTitleWPQ13':
+						listName = 'IMT_POP_Report';
+						break;
+					case '#WebPartTitleWPQ6':
+						listName = 'ASLGO';
+						break;
+					case '#WebPartTitleWPQ7':
+						listName = 'TRADOCLeaderCommunity_MediaEngagements';
+						break;
+					case '#WebPartTitleWPQ17':
+						listName = 'CAT';
+						break;
+				}
+
+				if ( listName === "CAT" ) {
+					var url = 'https://hq.tradoc.army.mil/sites/g357/current_operations/CAT/_vti_bin/listdata.svc/' + listName + '?select=Modified&$orderby=Modified';
+				} else {
+					var url = 'https://hq.tradoc.army.mil/sites/cpg/_vti_bin/listdata.svc/' + listName + '?select=Modified&$orderby=Modified';
+				}
+				console.log( "url for dates: ", url );
+
+				$.ajax({
+					url: url,
+					method: "GET",
+					headers: { "Accept" : "application/json; odata=verbose"},
+					success: function(data) {
+						var datesArr = [];
+						var results = data.d.results;
+						var j = jQuery.parseJSON(JSON.stringify(results));
+
+						j.forEach(function(item){
+							var date = item.Modified;
+							var formattedDate = moment(date).format('MM/DD/YYYY');
+							datesArr.push(formattedDate);
+						});
+						var tempI = datesArr.length-1
+						var asOfDate = datesArr[tempI];
+						var date = asOfDate.substr(3, 2);
+						var month = asOfDate.substr(0, 2);
+						var year = asOfDate.substr(8, 2);
+						var monthStr = "";
+						switch(month) {
+							case "01":
+								monthStr = "JAN";
+								break;
+							case "02":
+								monthStr = "FEB";
+								break;
+							case "03":
+								monthStr = "MAR";
+								break;
+							case "04":
+								monthStr = "APR";
+								break;
+							case "05":
+								monthStr = "MAY";
+								break;
+							case "06":
+								monthStr = "JUN;
+								break;
+							case "07":
+								monthStr = "JUL";
+								break;
+							case "08":
+								monthStr = "AUG";
+								break;
+							case "09":
+								monthStr = "SEP";
+								break;
+							case "10":
+								monthStr = "OCT";
+								break;
+							case "11":
+								monthStr = "NOV";
+								break;
+							case "12":
+								monthStr = "DEC";
+								break;
+						}
+						var milDate = date + monthStr + year;
+						var temp = idName + " h3 a nobr span";
+						var currentTitle = $(temp)[0].innerText;
+						$(temp)[0].innerText = currentTitle +  " - As Of: " + milDate;						
+					},
+					error: function(data) {
+						failure(data.responseJSON.error);
+					}
+				});
+			});
+		});
+	}
+
+	updateAsOfDate();
+
+</script>

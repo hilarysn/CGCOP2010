@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve" id="gs1">
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+       #path-gs1 {
+         fill: gold;
+       }
+    ]]>
+    </style>
+  </defs>
+  <g id="bg-gs1">
+    <rect fill="none" width="16" height="16" id="rect-gs1" />
+  </g>
+  <path id="path-gs1" d="M 16,5 H 10 L 8,0 6,5 H 0 L 4,10 2,16 8,12 14,16 12,10 16,5 z" />
+</svg>

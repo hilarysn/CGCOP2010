@@ -1,0 +1,23 @@
+body{font-size: 0.8em;} 
+.col-lg-4 {
+	-ms-flex: 0 0 50.00%;
+	flex: 0 0 50.00%;
+	max-width: 50.00%;
+}
+.highcharts-container {
+	width: 50%;
+	text-align: center;
+}
+.show.modal .modal-dialog {
+	-webkit-transform: translate(0, 0);
+	transform: translate(-1, -1);
+}
+.modal-footer {
+	display: inline-block;
+}
+.ms-WPBody noindex ms-wpContentDivSpace #WebPartWPQ11{
+	overflow: visible;
+}
+.panel-black > .panel-heading {
+	display: none;
+}				  	

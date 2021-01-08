@@ -1,0 +1,269 @@
+﻿<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script language="javascript" type="text/javascript" src="/sites/OCKO/_layouts/1033/init.js"></script>
+<script language="javascript" type="text/javascript" src="/sites/OCKO/_layouts/MicrosoftAjax.js"></script>
+<script language="javascript" type="text/javascript" src="/sites/OCKO/_layouts/SP.core.js"></script>
+<script language="javascript" type="text/javascript" src="/sites/OCKO/_layouts/SP.runtime.js"></script>
+<script language="javascript" type="text/javascript" src="/sites/OCKO/_layouts/SP.js"></script>
+<script language="javascript" type="text/javascript" src="/sites/OCKO/SiteAssets/js/jquery.min.js"></script>
+<SharePoint:ScriptLink ID="ScriptLink0" Name="init.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:ScriptLink ID="ScriptLink1" Name="MicrosoftAjax.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:ScriptLink ID="ScriptLink2" Name="SP.core.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:ScriptLink ID="ScriptLink3" Name="SP.runtime.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:ScriptLink ID="ScriptLink4" Name="SP.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:ScriptLink ID="ScriptLink5" Name="jquery.min.js" runat="server" Defer="False" OnDemand="true" LoadAfterUI="false" Localizable="false" />
+<SharePoint:FormDigest runat="server" />
+<style type="text/css">
+	#map, #map_container {
+		height: 480px;
+		margin: auto;
+		z-index: 50;
+	}
+	#map_loading {
+		position: absolute;
+		background: #ffffff;
+		width: 350px;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		height: 120px;
+		padding: 10px;
+		color: #000000;
+		margin: auto;
+		font-family: "Segoe UI";
+		font-size: 1.5em;
+		text-align: center;
+		vertical-align: middle;
+		display: block;
+		z-index: 51;
+	}
+	.popRow {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.5em;
+		margin-bottom: 1px;
+	}
+	.popdata {
+		height: 100%;
+	}
+	.popBox {
+		position: relative;
+		/*background: rgba(0, 0, 255, 0.8);*/ /*#0000ff;*/
+		/*color: #ffffff;*/
+		margin: 15px 0px;
+		/*border: 2px solid black;*/
+		width: 180px;
+		cursor: pointer;
+	}
+	.info-right {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.markerpanel {
+		display: none;
+		width: 240px;
+		background-color: white;
+		position: fixed;
+		z-index: 50;
+	}
+	.panel-heading {
+		position: relative;
+	}
+	.markerpanelclose {
+		position: absolute;
+		top: 0;
+		right: 5px;
+	}
+	.alert {
+		padding-left: 5px;
+	}
+	#legend .alert {
+		float: left;
+		padding-left: 5px;
+		margin-left: 5px;
+		min-width: 140px;
+	}
+	#legend .alert:first-child {
+		margin-left: 0;
+	}
+	.ms-core-pageTitle {
+		display: none;
+	}
+	#sideNavBox {
+		padding-top: 1em;
+	}
+	.ms-rte-layoutszone-inner {
+		padding-top: 1em;
+	}
+	.leaflet-interactive {
+		cursor: crosshair;
+		background-image: radial-gradient(circle closest-corner at 20% 20%, orange, yellow, transparent);
+	}
+	.blackPopupPanel {
+		min-width: 250px;
+		z-index: 52;
+		max-height: 175px !Important;
+		overflow:auto;
+	}
+	.redPopupPanel {
+		min-width: 250px;
+		z-index: 53;
+		min-height: 180px !Important;
+	}
+	.leaflet-popup-content {
+		z-index: 54;
+		min-width: 100px !important;
+		max-height: 300px;
+		overflow: auto;
+	}
+	.leaflet-bar a {
+		background-color: #fff;
+		border-bottom: 1px solid #ccc;
+		color: #444;
+		display: block;
+		height: 26px;
+		width: 26px;
+		line-height: 1.45 !important;
+		text-align: center;
+		text-decoration: none;
+		font: bold 1.25em 'Lucida Console', Monaco, monospace;
+	}
+	.panelheader {
+		background-color: #333;
+		color: #fff;
+		font: bold 1.25em 'Lucida Console', Monaco, monospace;
+	}
+	#mapwrapper {
+		height: 71vh;
+		width: 100%;
+	}
+	#toolbar {
+		/*height: 5vh;*/
+		width: 100%;
+		/*padding-bottom: 5px;*/
+	}
+	#txtSearch {
+		width: 100%;
+	}
+	#mapdiv {
+		height: 70vh;
+		width: 100%;
+		z-index: 40;
+	}
+	.panel-body {
+		min-height: 100px;
+	}
+	.widgetbody {
+		width: 100%;
+		min-height: 100px;
+		position: relative;
+	}
+	.input [type=button], input[type=reset], input[type=submit], button {
+		padding: 1px 1px;
+		border: 1px solid rgba(0, 0, 0, 0);
+		border-bottom-left-radius: 2px;
+		border-top-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		border-top-right-radius: 2px;
+		min-width: 1.75em;
+		box-shadow: none;
+	}
+	.btn {
+		line-height: .75;
+		font-size: 0.75rem;
+		padding-right: 0.5rem;
+		padding-left: 0.5rem;
+	}
+	.legend {
+		font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+		line-height: 1.5;
+		font-size: 1em;
+		padding-right: 1.25rem;
+		padding-left: 1.25rem;
+	}
+	@import "~leaflet.markercluster/dist/MarkerCluster.css";
+	@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+</style>
+<!-- Load Leaflet -->
+<link rel="stylesheet" type="text/css" href="/sites/OCKO/PMT/SiteAssets/css/leaflet.css" />
+<script src="/sites/OCKO/PMT/SiteAssets/js/leaflet.js"></script>
+<!-- Load Esri Leaflet -->
+<script src="/sites/OCKO/PMT/SiteAssets/js/esri-leaflet.js"></script>
+<!-- Load Esri Leaflet Geocoder -->
+<link rel="stylesheet" type="text/css" href="/sites/OCKO/PMT/SiteAssets/css/esri-leaflet-geocoder.css">
+<script src="/sites/OCKO/PMT/SiteAssets/js/esri-leaflet-geocoder.js"></script>
+<!-- Load Esri Leaflet Markercluster -->
+<link rel="stylesheet" type="text/css" href="/sites/OCKO/PMT/SiteAssets/css/Markercluster.css">
+<link rel="stylesheet" type="text/css" href="/sites/OCKO/PMT/SiteAssets/css/Markercluster.Default.css">
+<script src="/sites/OCKO/PMT/SiteAssets/js/leaflet.markercluster.js"></script>
+<script src="/sites/OCKO/PMT/SiteAssets/js/leaflet.markercluster.layersupport.js"></script>
+
+<script language="javascript" type="text/javascript">
+	//SP.SOD.executeOrDelayUntilScriptLoaded( function () {
+	//	var SLASH = "/";
+	//	var tp1 = new String( window.location.protocol );
+	//	var tp2 = new String( window.location.host );
+	//	//var tp3 = L_Menu_BaseUrl;
+	//	var tp3 = "/sites/OCKO/PMT";
+	//	var site = tp1 + SLASH + SLASH + tp2 + tp3;
+	//	console.log( 'map html site: ', site );
+	//	RegisterSod( 'init.js', "/sites/OCKO/_layouts/1033/init.js" );
+	//	RegisterSod( 'MicrosoftAjax.js', "/sites/OCKO/_layouts/MicrosoftAjax.js" );
+	//	RegisterSod( 'sp.core.js', "/sites/OCKO/_layouts/1033/sp.core.js" );
+	//	RegisterSod( 'sp.runtime.js', "/sites/OCKO/_layouts/sp.runtime.js" );
+	//	RegisterSod( 'sp.js', "/sites/OCKO/_layouts/sp.js" );
+	//	RegisterSod( 'jquery.min.js', "/sites/OCKO/SiteAssets/js/jquery.min.js" );
+	//	RegisterSod( 'leaflet.js', site + "/SiteAssets/js/leaflet.js" );
+	//	RegisterSod( 'esri-leaflet.js', site + "/SiteAssets/js/esri-leaflet.js" );
+	//	RegisterSod( 'esri-leaflet-geocoder.js', site + "/SiteAssets/js/esri-leaflet-geocoder.js" );
+	//	RegisterSod( 'leaflet.markercluster.js', site + "/SiteAssets/js/leaflet.markercluster.js" );
+	//	RegisterSod( 'leaflet.markercluster.layersupport.js', site + "/SiteAssets/js/leaflet.markercluster.layersupport.js" );
+	//	RegisterSod( 'CewpKmMap21.js', site + "/SiteAssets/js/CewpKmMap21.js" );
+	//	RegisterSodDep( 'init.js', 'MicrosoftAjax.js' );
+	//	RegisterSodDep( 'MicrosoftAjax.js', 'sp.core.js' );
+	//	RegisterSodDep( 'sp.core.js', 'sp.runtime.js' );
+	//	RegisterSodDep( 'sp.runtime.js', 'sp.js' );
+	//	RegisterSodDep( 'sp.js', 'jquery.min.js' );
+	//	RegisterSodDep( 'jquery.min.js', 'leaflet.js' );
+	//	RegisterSodDep( 'leaflet.js', 'esri-leaflet.js' );
+	//	RegisterSodDep( 'esri-leaflet.js', 'esri-leaflet-geocoder.js' );
+	//	RegisterSodDep( 'esri-leaflet-geocoder.js', 'leaflet.markercluster.js' );
+	//	RegisterSodDep( 'leaflet.markercluster.js', 'leaflet.markercluster.layersupport.js' );
+	//	RegisterSodDep( 'leaflet.markercluster.layersupport.js', 'CewpKmMap21.js' );
+	//	EnsureScriptFunc( "CewpKmMap21.js", null, function () {
+	//		CKO.KNOWLEDGEMAP.MAP.Map().Init( site );
+	//	} );
+	//}, "sp.js" );
+
+	SP.SOD.executeOrDelayUntilScriptLoaded( function () {
+		var SLASH = "/";
+		var tp1 = new String( window.location.protocol );
+		var tp2 = new String( window.location.host );
+		//var tp3 = L_Menu_BaseUrl;
+		var tp3 = "/sites/OCKO/PMT";
+		var site = tp1 + SLASH + SLASH + tp2 + tp3;
+		SP.SOD.registerSod( 'CewpKmMap21.js', site + "/SiteAssets/js/CewpKmMap21.js" );
+		EnsureScriptFunc( "CewpKmMap21.js", null, function () {
+			CKO.KNOWLEDGEMAP.MAP.Map().Init( site );
+		} );
+	}, "sp.js" );
+</script>
+<div id="map" style="">
+	<div id="map_loading">
+		<table width='100%' align='center'>
+			<tr><td align='center'><img src='/_layouts/images/gears_an.gif' /></td></tr>
+			<tr><td align='center'><div style='margin-top: 10px; font-size: 16px;'>Getting Map Data...Please wait.</div></td></tr>
+		</table>
+	</div>
+	<div class="map" id="map" ref="map"></div>
+</div>
+<div id="MarkerPanel" class="markerpanel">
+	<div class="panel panel-info">
+		<div class="panel-heading"><button type="button" class="close markerpanelclose" onclick="CKO.KNOWLEDGEMAP.MAP.Map().closemarker()">&times;</button></div>
+		<div class="panel-body">
+			<div class="container-fluid" id="MarkerBody"></div>
+		</div>
+	</div>
+</div>

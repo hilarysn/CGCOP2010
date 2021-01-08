@@ -1,0 +1,81 @@
+<style type="text/css">
+.ms-WPHeader td, .ms-fakewptitle{
+	border-bottom:1px solid #fff!important; 
+}
+.ms-standardheader, .ms-WPTitle{
+	color:#777!important; 
+	font-weight: 800; 
+	background-color:#fff;
+}
+#s4-topheader2{
+	display: none!important;
+}
+.s4-pagedescription {
+	display: none!important;
+}
+.s4-title-inner{
+		display: none!important;
+}
+.s4-ca {
+    margin-left: 0px !important;
+}
+# zz17_V4QuickLaunchMenu{
+		display: none!important;
+}
+body #s4-leftpanel{
+    width: 0px!important;
+}
+.s4-ba {
+    padding: 0px 0px 0px 0px;
+}
+#s4-titlerow{
+	display: none!important;
+}
+div.article, div.welcome{
+	padding: 0px 0px!important;
+}
+#MSOImageWebPart_WebPartWPQ2, #MSOImageWebPart_WebPartWPQ3, #MSOImageWebPart_WebPartWPQ4, #MSOImageWebPart_WebPartWPQ5, #MSOImageWebPart_WebPartWPQ6, #MSOImageWebPart_WebPartWPQ7, #MSOImageWebPart_WebPartWPQ8, #MSOImageWebPart_WebPartWPQ9, #MSOImageWebPart_WebPartWPQ10, #MSOImageWebPart_WebPartWPQ11, #MSOImageWebPart_WebPartWPQ12 {
+    height: 260px;
+	width: 400px;
+}
+ms-standardheader 
+ /* All cells (TDs) in the table row (TR) */
+.ms-WPHeader TD{
+background-color: #fff;
+border-bottom:1px transparent!important;
+padding:3px;
+color: #777!important;
+font-weight:bold;
+}
+/* Web Part title */
+.ms-WPTitle{
+color: #777!important;
+font-weight:bold;
+}
+.s4-wpActive{
+color: #777!important;
+font-weight:bold;
+}
+/* Linked title and visited */
+.ms-WPTitle a:link, .ms-WPTitle a:visited {
+color: #blue!important;
+text-decoration:none!important;
+}
+/* Hover */
+.ms-WPTitle a:hover {
+color:blue!important;
+}
+#WebPartCaptionWP{
+  color: #777!important;
+}
+.a accesskey="W" {
+  color: #777!important;
+}
+#WebPartCaptionWPQ2, #WebPartCaptionWPQ3, #WebPartCaptionWPQ4, #WebPartCaptionWPQ5, #WebPartCaptionWPQ6, #WebPartCaptionWPQ6, #WebPartCaptionWPQ7, #WebPartCaptionWPQ8, #WebPartCaptionWPQ9, #WebPartCaptionWPQ10, #WebPartCaptionWPQ11, #WebPartCaptionWPQ12{
+  color: #777!important;
+}
+.ms-WPTitle a:,.s4-wpcell .ms-WPTitle, .s4-wpActive .ms-WPTitle {
+    cursor: pointer;
+    color: #777 !important;
+}
+</style>

@@ -1,0 +1,46 @@
+﻿<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function () {		
+        SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+            var SLASH = "/";
+            var tp1 = new String(window.location.protocol);
+            var tp2 = new String(window.location.host);
+            var tp3 = L_Menu_BaseUrl;
+            var site = tp1 + SLASH + SLASH + tp2 + tp3;
+			//$('#taskertable').modal('hide'); 
+            SP.SOD.registerSod('CEWP_Chart_Taskers.js', site + "/SiteAssets/js/CEWP_Chart_Taskers.js");
+            EnsureScriptFunc("CEWP_Chart_Taskers.js", null, function () {
+                CG.DASHBOARD.CHARTS.TASKERS().Init(site, 'M');
+            });
+        }, "sp.js");
+    });
+</script>
+<div id="containerpie">
+	<table style="height:100%;width:100%;">
+		<tr><td align='center'><img src='/_layouts/images/gears_an.gif' /></td></tr>
+		<tr><td align='center'><div style='margin-top: 10px; font-size: 16px;'>Getting Data...Please wait.</div></td></tr>
+	</table>
+</div>
+<head><title>CEWP_Chart_Taskers</title></head>
+<style scoped>
+  .ms-dlgOverlay {
+	background-color: white;
+  }
+  .loading {
+    color: #2df20f;
+    font-size: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .fa-spinner {
+    color: #2df20f;
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .highcharts-container {
+    width: 100%;
+    text-align: center;
+  }
+</style>
